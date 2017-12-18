@@ -24,7 +24,7 @@ class LogInButton extends Component {
         return (
             <React.Fragment>
                 {!this.state.userRegister &&
-                <Button as='a' primary style={{ marginLeft: '0.5em' }} >
+                <Button as='a' secondary style={{ marginLeft: '0.5em' }} >
                     <Icon name='user circle outline'/>
                     Iniciar sesión
                 </Button>}

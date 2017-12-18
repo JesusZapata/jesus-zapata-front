@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { Button,
     Form,
     Icon,
@@ -32,6 +34,14 @@ class RegisterButton extends Component {
         };
     }
 
+    static propTypes = {
+        open: PropTypes.bool,
+        full_name: PropTypes.string,
+        email: PropTypes.string,
+        password: PropTypes.string,
+        accept: PropTypes.bool
+    };
+
     handleChange = (event, {name, value, checked}) => {
         this.setState((prevState) => {
             prevState[name] = value  ? value : checked;
@@ -47,27 +57,27 @@ class RegisterButton extends Component {
 
     handleSubmit = (event) => {
         this.setState((prevState) => {
-            prevState['formErrors'] = {
+            prevState.formErrors = {
                 full_name: (this.state.full_name === ''),
                 email: (this.state.email === ''),
                 password: (this.state.password === ''),
                 accept: (this.state.accept === false),
             }
-            prevState['hasFormErrors'] = (
-                !(prevState['full_name'] &&
-                    prevState['email'] &&
-                    prevState['password'] &&
-                    prevState['accept'])
+            prevState.hasFormErrors = (
+                !(prevState.full_name &&
+                    prevState.email &&
+                    prevState.password &&
+                    prevState.accept)
             );
-            if (!prevState['hasFormErrors']) {
+            if (!prevState.hasFormErrors) {
                 const User = {
-                    full_name: prevState['full_name'],
-                    email: prevState['email'],
-                    password: prevState['password'],
+                    full_name: prevState.full_name,
+                    email: prevState.email,
+                    password: prevState.password,
                 };
                 localStorage.setItem('User', JSON.stringify(User));
-                prevState['User'] = User;
-                prevState['userRegister'] = true;
+                prevState.User = User;
+                prevState.userRegister = true;
             }
             this.closeModal();
         });
@@ -83,7 +93,7 @@ class RegisterButton extends Component {
             <React.Fragment>
                 {!this.state.userRegister &&
                 <React.Fragment>
-                    <Button as='a' secondary onClick={this.openModal}>
+                    <Button as='a' primary onClick={this.openModal}>
                         <Icon name='add user'/>
                         Registrarse
                     </Button>
