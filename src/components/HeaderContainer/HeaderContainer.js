@@ -27,7 +27,6 @@ class HeaderContainer extends Component {
                     <Container>
                         <Menu pointing secondary size='large'>
                             <Menu.Item as='a' active>Home</Menu.Item>
-                            <Menu.Item as='a'>Mi cuenta</Menu.Item>
                             <Menu.Item position='right'>
                                 <RegisterButton/>
                                 <UserButton/>
