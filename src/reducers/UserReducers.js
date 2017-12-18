@@ -1,10 +1,17 @@
-import REGISTER_USER from '../actions/UserActions';
+import REGISTER_USER from '../constants';
 
-export const geod = (state = {}, action) => {
+const initialState = {
+    User: {}
+};
+
+export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case REGISTER_USER:
-            return action.geod;
+            return {
+                ...state,
+                User: {}
+            };
         default:
-            return state;
+            return state
     }
-};
+}

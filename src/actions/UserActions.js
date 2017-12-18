@@ -1,8 +1,8 @@
-export const REGISTER_USER = 'REGISTER_USER'; 
+import UserConstants from '../constants';
 
 export const register = User => {
   return {
-    type: REGISTER_USER,
+    type: UserConstants.REGISTER_USER,
     user: User
   }
 }

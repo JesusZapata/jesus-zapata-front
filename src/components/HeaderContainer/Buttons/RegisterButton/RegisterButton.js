@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Button,
@@ -7,9 +7,19 @@ import { Button,
     Icon,
     Modal } from 'semantic-ui-react'
 
+import UserActions from '../../../../actions';
+
 import './RegisterButton.css';
 
 class RegisterButton extends Component {
+
+    static propTypes = {
+        open: PropTypes.bool,
+        full_name: PropTypes.string,
+        email: PropTypes.string,
+        password: PropTypes.string,
+        accept: PropTypes.bool
+    };
 
     constructor(props) {
         super(props);
@@ -34,22 +44,14 @@ class RegisterButton extends Component {
         };
     }
 
-    static propTypes = {
-        open: PropTypes.bool,
-        full_name: PropTypes.string,
-        email: PropTypes.string,
-        password: PropTypes.string,
-        accept: PropTypes.bool
-    };
-
     handleChange = (event, {name, value, checked}) => {
         this.setState((prevState) => {
             prevState[name] = value  ? value : checked;
-            prevState['hasFormErrors'] = (
-                !(prevState['full_name'] &&
-                    prevState['email'] &&
-                    prevState['password'] &&
-                    prevState['accept'])
+            prevState.hasFormErrors = (
+                !(prevState.full_name &&
+                    prevState.email &&
+                    prevState.password &&
+                    prevState.accept)
             );
             return prevState;
         });
@@ -79,8 +81,8 @@ class RegisterButton extends Component {
                 prevState.User = User;
                 prevState.userRegister = true;
             }
-            this.closeModal();
         });
+        this.closeModal();
         event.preventDefault();
     }
 
@@ -166,4 +168,16 @@ class RegisterButton extends Component {
 
 }
 
-export default RegisterButton;
+const mapStateToProps = state => ({
+    userRegister: state.userRegister
+})
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        register: () => {
+            dispatch(UserActions.register());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterButton)
