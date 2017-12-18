@@ -6,9 +6,9 @@ import { Button,
     Image,
     Label } from 'semantic-ui-react'
 
-import './LogInButton.css';
+import './UserButton.css';
 
-class LogInButton extends Component {
+class UserButton extends Component {
     
     constructor(props) {
         super(props);
@@ -42,4 +42,4 @@ const mapStateToProps = (state, ownProps) => ({
     User: state.UserReducers
 });
 
-export default connect(mapStateToProps)(LogInButton)
+export default connect(mapStateToProps)(UserButton)
