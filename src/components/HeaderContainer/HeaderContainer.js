@@ -10,6 +10,7 @@ import { Container,
 //import logo from '../../img/logo.svg';
 
 import RegisterButton from './Buttons/RegisterButton';
+import LogInButton from './Buttons/LogInButton';
 
 import './HeaderContainer.css';
 
@@ -29,10 +30,7 @@ class HeaderContainer extends Component {
                             <Menu.Item as='a'>Mi cuenta</Menu.Item>
                             <Menu.Item position='right'>
                                 <RegisterButton/>
-                                <Button as='a' primary style={{ marginLeft: '0.5em' }}>
-                                    <Icon name='user circle outline'/>
-                                    Iniciar sesión
-                                </Button>
+                                <LogInButton/>
                                 <Button as='a' animated='vertical' basic style={{ marginLeft: '0.5em' }}>
                                     <Button.Content visible>
                                         <Icon name='cart'/>
