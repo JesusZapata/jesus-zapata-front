@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Button,
     Icon,
@@ -12,11 +13,9 @@ class LogInButton extends Component {
     constructor(props) {
         super(props);
 
-        const User = localStorage.getItem('User') ? JSON.parse(localStorage.getItem('User')) : false;
-
         this.state = {
-            User: User,
-            userRegister: User ? true : false,
+            User: props.User,
+            userRegister: ('email' in props.User) ? true : false,
         };
     }
 
@@ -39,4 +38,8 @@ class LogInButton extends Component {
 
 }
 
-export default LogInButton;
+const mapStateToProps = (state, ownProps) => ({
+    User: state.UserReducers
+});
+
+export default connect(mapStateToProps)(LogInButton)

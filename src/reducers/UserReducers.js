@@ -1,15 +1,14 @@
-import REGISTER_USER from '../constants';
+import { REGISTER_USER } from '../constants/UserConstants';
 
-const initialState = {
-    User: {}
-};
+const initialState = localStorage.getItem('App.User') ? JSON.parse(localStorage.getItem('App.User')) : {};
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case REGISTER_USER:
+            localStorage.setItem('App.User', JSON.stringify(action.User));
             return {
                 ...state,
-                User: {}
+                User: action.User
             };
         default:
             return state

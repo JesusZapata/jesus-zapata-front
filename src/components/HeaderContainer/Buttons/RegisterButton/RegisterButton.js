@@ -7,7 +7,7 @@ import { Button,
     Icon,
     Modal } from 'semantic-ui-react'
 
-import UserActions from '../../../../actions';
+import { registerAction } from '../../../../actions/UserActions';
 
 import './RegisterButton.css';
 
@@ -24,8 +24,6 @@ class RegisterButton extends Component {
     constructor(props) {
         super(props);
 
-        const User = localStorage.getItem('User') ? JSON.parse(localStorage.getItem('User')) : false;
-
         this.state = {
             open: false,
             full_name: '',
@@ -39,8 +37,8 @@ class RegisterButton extends Component {
                 accept: false,
             },
             hasFormErrors: true,
-            User: User,
-            userRegister: User ? true : false,
+            User: props.User,
+            userRegister: ('email' in props.User) ? true : false,
         };
     }
 
@@ -77,9 +75,10 @@ class RegisterButton extends Component {
                     email: prevState.email,
                     password: prevState.password,
                 };
-                localStorage.setItem('User', JSON.stringify(User));
+                
                 prevState.User = User;
                 prevState.userRegister = true;
+                this.props.register(User);
             }
         });
         this.closeModal();
@@ -168,14 +167,14 @@ class RegisterButton extends Component {
 
 }
 
-const mapStateToProps = state => ({
-    userRegister: state.userRegister
-})
+const mapStateToProps = (state, ownProps) => ({
+    User: state.UserReducers
+});
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        register: () => {
-            dispatch(UserActions.register());
+        register: (User) => {
+            dispatch(registerAction(User));
         }
     }
 }

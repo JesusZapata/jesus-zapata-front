@@ -1,8 +1,8 @@
-import UserConstants from '../constants';
+import { REGISTER_USER } from '../constants/UserConstants';
 
-export const register = User => {
-  return {
-    type: UserConstants.REGISTER_USER,
-    user: User
-  }
+export const registerAction = User => {
+    return {
+        type: REGISTER_USER,
+        User: User
+    }
 }
