@@ -5,7 +5,8 @@ import { Input,
     Dropdown,
     Menu } from 'semantic-ui-react'
 
-import { filterCategory } from '../../../actions/CategoryActions';
+import { filterCategory,
+    selectCategory } from '../../../actions/CategoryActions';
 
 import './GeneralCategory.css';
 
@@ -13,7 +14,7 @@ class GeneralCategory extends Component {
     
     constructor(props) {
         super(props);
-
+        
         this.state = {
             Category: props.Category
         };
@@ -22,6 +23,7 @@ class GeneralCategory extends Component {
     handleItemClick = (e, {value}) => {
         this.setState((prevState, props) => {
             prevState.Category.active = value;
+            this.props.select(prevState);
             return prevState;
         });
     }
@@ -101,6 +103,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         filter: (Category) => {
             dispatch(filterCategory(Category));
+        },
+        select: (Category) => {
+            dispatch(selectCategory(Category));
         }
     }
 }

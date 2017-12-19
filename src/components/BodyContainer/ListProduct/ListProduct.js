@@ -18,14 +18,22 @@ class ListProduct extends Component {
         super(props);
 
         this.state = {
-            Product: props.Product
+            Product: props.Product,
+            Category: props.Category
         };
     }
 
     render() {
+        let filterProducts = this.state.Product.products.filter((item) => {
+            if (!this.state.Category.active) {
+                return true;
+            }
+            return (this.state.Category.active === item.sublevel_id);
+        });
+        console.log(filterProducts);
         return (
             <Card.Group itemsPerRow={3}>
-                {this.state.Product.products.map((item, i) => {
+                {filterProducts.map((item, i) => {
                     return (
                         <Card fluid={true} key={item.id}>
                             <Image src={image} size='medium'/>
@@ -54,7 +62,8 @@ class ListProduct extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    Product: state.productReducers
+    Product: state.productReducers,
+    Category: state.categoryReducers
 });
 
 const mapDispatchToProps = (dispatch) => {
