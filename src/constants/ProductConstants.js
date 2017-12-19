@@ -1,0 +1,1 @@
+export const FILTER_PRODUCT = 'App/Product/FILTER_PRODUCT'; 
