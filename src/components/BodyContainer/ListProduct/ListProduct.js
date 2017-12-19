@@ -30,7 +30,6 @@ class ListProduct extends Component {
             }
             return (this.state.Category.active === item.sublevel_id);
         });
-        console.log(filterProducts);
         return (
             <Card.Group itemsPerRow={3}>
                 {filterProducts.map((item, i) => {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Input,
-    Dropdown,
     Menu } from 'semantic-ui-react'
 
 import { filterCategory,
@@ -50,43 +49,15 @@ class GeneralCategory extends Component {
                 </Menu.Item>
                 {this.state.Category.categories.map((item, i) => {
                     return (
-                        <React.Fragment key={i}>
-                            {'sublevels' in item && item.sublevels.length
-                                ?
-                                <Dropdown
-                                    item
-                                    key={item.id}
-                                    value={item.id}
-                                    text={item.name}
-                                    pointing='left'
-                                >
-                                    <Dropdown.Menu>
-                                        {item.sublevels.map(sublevels => {
-                                            return (
-                                                <Dropdown.Item
-                                                    key={sublevels.id}
-                                                    value={sublevels.id}
-                                                    name={sublevels.name}
-                                                    onClick={this.handleItemClick}
-                                                >
-                                                    {sublevels.name}
-                                                </Dropdown.Item>
-                                            )
-                                        })}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                :
-                                <Menu.Item
-                                    key={item.id}
-                                    value={item.id}
-                                    name={item.name}
-                                    active={this.state.Category.active === item.id}
-                                    onClick={this.handleItemClick}
-                                >
-                                    {item.name}
-                                </Menu.Item>
-                            }
-                        </React.Fragment>
+                        <Menu.Item
+                            key={item.id}
+                            value={item.id}
+                            name={item.name}
+                            active={this.state.Category.active === item.id}
+                            onClick={this.handleItemClick}
+                        >
+                            {item.name}
+                        </Menu.Item>
                     )
                 })}
             </Menu>
