@@ -68,7 +68,8 @@ const initialState = {
             sublevels: []
         }
     ],
-    filter: ''
+    filter: '',
+    active: null
 };
 
 export default function reducer(state = initialState, action = {}) {

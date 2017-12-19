@@ -12,9 +12,6 @@ class App extends React.Component {
             <div>
                 <HeaderContainer />
                 <BodyContainer />
-                <h1>
-                    Contenido adicional
-                </h1>
             </div>
         );
     }

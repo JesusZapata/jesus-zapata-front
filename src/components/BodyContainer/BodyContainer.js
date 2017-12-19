@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import { Container,
-    Grid,
-    Segment } from 'semantic-ui-react'
+    Grid } from 'semantic-ui-react'
 
 import GeneralCategory from './GeneralCategory';
 import ListProduct from './ListProduct';

@@ -15,12 +15,16 @@ class GeneralCategory extends Component {
         super(props);
 
         this.state = {
-            activeItem: '',
-            Category: props.Category,
+            Category: props.Category
         };
     }
     
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+    handleItemClick = (e, {value}) => {
+        this.setState((prevState, props) => {
+            prevState.Category.active = value;
+            return prevState;
+        });
+    }
         
     handleFilterChange = (event, {value}) => {
         this.setState((prevState, props) => {
@@ -50,6 +54,7 @@ class GeneralCategory extends Component {
                                 <Dropdown
                                     item
                                     key={item.id}
+                                    value={item.id}
                                     text={item.name}
                                     pointing='left'
                                 >
@@ -58,7 +63,9 @@ class GeneralCategory extends Component {
                                             return (
                                                 <Dropdown.Item
                                                     key={sublevels.id}
+                                                    value={sublevels.id}
                                                     name={sublevels.name}
+                                                    onClick={this.handleItemClick}
                                                 >
                                                     {sublevels.name}
                                                 </Dropdown.Item>
@@ -69,8 +76,9 @@ class GeneralCategory extends Component {
                                 :
                                 <Menu.Item
                                     key={item.id}
+                                    value={item.id}
                                     name={item.name}
-                                    active={this.state.activeItem === item.name}
+                                    active={this.state.Category.active === item.id}
                                     onClick={this.handleItemClick}
                                 >
                                     {item.name}
