@@ -4,6 +4,8 @@ import { Form,
     Segment,
     Header } from 'semantic-ui-react'
 
+import DetailCategory from '../DetailCategory';
+
 import './MainSearch.css';
 
 const options = [
@@ -24,6 +26,8 @@ class MainSearch extends Component {
             <Segment>
                 <Header as='h3'>Buscador</Header>
                 <Form size="tiny">
+                    <Header size='tiny'>Sub categoria</Header>
+                    <DetailCategory/>
                     <Form.Group widths='equal'>
                         <Form.Input label='First name' placeholder='First name' />
                         <Form.Input label='Last name' placeholder='Last name' />

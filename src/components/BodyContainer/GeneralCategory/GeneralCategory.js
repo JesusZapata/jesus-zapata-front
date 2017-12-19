@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Input,
+    Label,
     Menu } from 'semantic-ui-react'
 
 import { filterCategory,
@@ -57,6 +58,7 @@ class GeneralCategory extends Component {
                             onClick={this.handleItemClick}
                         >
                             {item.name}
+                            <Label>{item.sublevels.length}</Label>
                         </Menu.Item>
                     )
                 })}
