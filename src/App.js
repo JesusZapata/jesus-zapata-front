@@ -3,6 +3,7 @@ import React from 'react';
 
 import './App.css';
 import HeaderContainer from './components/HeaderContainer';
+import BodyContainer from './components/BodyContainer';
 
 class App extends React.Component {
 
@@ -10,6 +11,7 @@ class App extends React.Component {
         return (
             <div>
                 <HeaderContainer />
+                <BodyContainer />
                 <h1>
                     Contenido adicional
                 </h1>

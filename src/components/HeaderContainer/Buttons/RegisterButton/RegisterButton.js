@@ -80,6 +80,7 @@ class RegisterButton extends Component {
                 prevState.userRegister = true;
                 this.props.register(User);
             }
+            return prevState;
         });
         this.closeModal();
         event.preventDefault();
@@ -168,7 +169,7 @@ class RegisterButton extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    User: state.UserReducers
+    User: state.userReducers
 });
 
 const mapDispatchToProps = (dispatch) => {

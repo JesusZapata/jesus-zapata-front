@@ -32,7 +32,7 @@ class UserButton extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    User: state.UserReducers
+    User: state.userReducers
 });
 
 export default connect(mapStateToProps)(UserButton)

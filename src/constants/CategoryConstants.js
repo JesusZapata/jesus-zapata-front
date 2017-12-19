@@ -1,0 +1,1 @@
+export const FILTER_CATEGORY = 'App/Category/FILTER_CATEGORY'; 

@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 import UserReducers from './UserReducers';
+import CategoryReducers from './CategoryReducers';
 
 export default combineReducers({
-    UserReducers
+    userReducers: UserReducers,
+    categoryReducers: CategoryReducers
 });
 
