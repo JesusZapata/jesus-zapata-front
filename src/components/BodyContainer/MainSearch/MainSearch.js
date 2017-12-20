@@ -1,51 +1,90 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Form,
-    Segment,
-    Header } from 'semantic-ui-react'
+    Radio,
+    Header,
+    Dropdown } from 'semantic-ui-react'
 
-import DetailCategory from '../DetailCategory';
+import { mainSearchChange } from '../../../actions/MainSearchActions';
 
 import './MainSearch.css';
 
-const options = [
-    { key: 'm', text: 'Male', value: 'male' },
-    { key: 'f', text: 'Female', value: 'female' },
-  ]
-
 class MainSearch extends Component {
     
-    state = {}
+    constructor(props) {
+        super(props);
 
-    handleChange = (e, { value }) => this.setState({ value })
+        this.state = {
+            MainSearch: props.MainSearch
+        };
+    }
+
+    handleChange = (event, {name, value, checked}) => {
+        value = checked ? checked : value;
+        this.setState((prevState) => {
+            prevState.MainSearch[name] = value;
+            this.props.mainSearchChange(prevState.MainSearch);
+            return prevState;
+        });
+    }
 
     render () {
-        const { value } = this.state
-
         return(
-            <Segment>
-                <Header as='h3'>Buscador</Header>
-                <Form size="tiny">
-                    <Header size='tiny'>Sub categoria</Header>
-                    <DetailCategory/>
-                    <Form.Group widths='equal'>
-                        <Form.Input label='First name' placeholder='First name' />
-                        <Form.Input label='Last name' placeholder='Last name' />
-                        <Form.Select label='Gender' options={options} placeholder='Gender' />
-                    </Form.Group>
-                    <Form.Group inline>
-                        <label>Size</label>
-                        <Form.Radio label='Small' value='sm' checked={value === 'sm'} onChange={this.handleChange} />
-                        <Form.Radio label='Medium' value='md' checked={value === 'md'} onChange={this.handleChange} />
-                        <Form.Radio label='Large' value='lg' checked={value === 'lg'} onChange={this.handleChange} />
-                    </Form.Group>
-                    <Form.Checkbox label='I agree to the Terms and Conditions' />
-                    <Form.Button secondary>Submit</Form.Button>
-                </Form>
-            </Segment>
+            <Form size="tiny">
+                <Header as='h5'>Nombre</Header>
+                <Form.Input
+                    icon='search'
+                    name="search"
+                    fluid
+                    value={this.state.MainSearch.search || ''}
+                    onChange={this.handleChange}
+                    placeholder='Nombre producto'
+                />
+                <Header as='h5'>Disponibilidad</Header>
+                <Radio
+                    name="availability"
+                    toggle
+                    checked={!!this.state.MainSearch.availability}
+                    onChange={this.handleChange}
+                />
+                <Header as='h5'>Rango de precios</Header>
+                <Form.Group grouped size="mini">
+                    <Form.Input
+                        name="price_since"
+                        label="Desde"
+                        placeholder='Desde'
+                        type='number'
+                        step='any'
+                        value={this.state.MainSearch.price_since || ''}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Input
+                        name="price_until"
+                        label="Hasta"
+                        placeholder='Hasta'
+                        type='number'
+                        step='any'
+                        value={this.state.MainSearch.price_until || ''}
+                        onChange={this.handleChange}
+                    />
+                </Form.Group>
+            </Form>
         );
     }
 
 }
 
-export default MainSearch;
+const mapStateToProps = (state, ownProps) => ({
+    MainSearch: state.mainSearchReducers
+});
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        mainSearchChange: (MainSearch) => {
+            dispatch(mainSearchChange(MainSearch));
+        },
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainSearch)

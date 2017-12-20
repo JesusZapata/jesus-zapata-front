@@ -19,19 +19,36 @@ class ListProduct extends Component {
 
         this.state = {
             Product: props.Product,
-            Category: props.Category
+            Category: props.Category,
+            MainSearch: props.MainSearch,
+            filterProducts: []
         };
     }
 
-    render() {
-        let filterProducts = this.state.Product.products.filter((item) => {
-            if (!this.state.Category.active) {
-                return true;
+    filterProducts = () => {
+        return this.state.Product.products.filter((item) => {
+            let result = [true];
+
+            if (this.state.MainSearch.search !== '') {
+                result.push(this.state.MainSearch.search === item.name);
             }
-            return (this.state.Category.active === item.sublevel_id);
+            
+            if (this.state.MainSearch.availability) {
+                result.push(item.quantity > 0);
+            }
+
+            if (this.state.Category.active !== 0) {
+                result.push(this.state.Category.active === item.sublevel_id);
+            }
+
+            return result.every(item => {return item});
         });
+    }
+
+    render() {
+        let filterProducts = this.filterProducts();
         return (
-            <Card.Group itemsPerRow={3}>
+            <Card.Group itemsPerRow={4}>
                 {filterProducts.map((item, i) => {
                     return (
                         <Card fluid={true} key={item.id}>
@@ -62,7 +79,8 @@ class ListProduct extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
     Product: state.productReducers,
-    Category: state.categoryReducers
+    Category: state.categoryReducers,
+    MainSearch: state.mainSearchReducers,
 });
 
 const mapDispatchToProps = (dispatch) => {

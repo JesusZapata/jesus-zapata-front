@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { Container,
     Grid,
+    Segment,
     Divider } from 'semantic-ui-react'
 
 import GeneralCategory from './GeneralCategory';
@@ -18,12 +19,13 @@ class BodyContainer extends Component {
             <Container>
                 <Grid columns='equal'>
                   <Grid.Column>
-                    <GeneralCategory/>
+                    <Segment piled={true} size="mini" color="blue">
+                        <MainSearch/>
+                        <GeneralCategory/>
+                    </Segment>
                   </Grid.Column>
                   <Grid.Column width={12}>
                     <BreadCrumb/>
-                    <Divider/>
-                    <MainSearch/>
                     <Divider/>
                     <ListProduct/>
                   </Grid.Column>

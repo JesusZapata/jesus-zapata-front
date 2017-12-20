@@ -5,9 +5,10 @@ import { Container,
     Segment,
     Menu ,
     Button,
-    Icon } from 'semantic-ui-react'
+    Icon,
+    Image } from 'semantic-ui-react'
 
-//import logo from '../../img/logo.svg';
+import logo from '../../assets/images/logo.svg';
 
 import RegisterButton from './Buttons/RegisterButton';
 import UserButton from './Buttons/UserButton';
@@ -26,7 +27,9 @@ class HeaderContainer extends Component {
                 >
                     <Container>
                         <Menu pointing secondary size='large'>
-                            <Menu.Item as='a' active>Home</Menu.Item>
+                            <Menu.Item as='a' active>
+                                <Image src={logo} size='small' wrapped />
+                            </Menu.Item>
                             <Menu.Item position='right'>
                                 <RegisterButton/>
                                 <UserButton/>

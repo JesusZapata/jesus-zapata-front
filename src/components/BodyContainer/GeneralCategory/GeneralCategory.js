@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Input,
-    Label,
+import { Label,
+    Header,
     Menu } from 'semantic-ui-react'
 
 import { filterCategory,
@@ -28,41 +28,35 @@ class GeneralCategory extends Component {
         });
     }
         
-    handleFilterChange = (event, {value}) => {
-        this.setState((prevState, props) => {
-            prevState.Category.filter = value;
-            this.props.filter(prevState);
-            return prevState;
-        });
-    }
-
     render() {
         return (
-            <Menu pointing vertical fluid={true}>
-                <Menu.Item>
-                    <Input
-                        icon='search'
-                        placeholder='Buscar categoria'
-                        onChange={this.handleFilterChange}
-                        value={this.state.Category.filter}
-                        name="filter"
-                    />
-                </Menu.Item>
-                {this.state.Category.categories.map((item, i) => {
-                    return (
-                        <Menu.Item
-                            key={item.id}
-                            value={item.id}
-                            name={item.name}
-                            active={this.state.Category.active === item.id}
-                            onClick={this.handleItemClick}
-                        >
-                            {item.name}
-                            <Label>{item.sublevels.length}</Label>
-                        </Menu.Item>
-                    )
-                })}
-            </Menu>
+            <React.Fragment>
+                <Header as='h5'>Categorias</Header>
+                <Menu pointing vertical fluid={true}>
+                    <Menu.Item
+                        key={0}
+                        value={0}
+                        active={this.state.Category.active === 0}
+                        onClick={this.handleItemClick}
+                    >
+                        Todos
+                    </Menu.Item>
+                    {this.state.Category.categories.map((item, i) => {
+                        return (
+                            <Menu.Item
+                                key={item.id}
+                                value={item.id}
+                                name={item.name}
+                                active={this.state.Category.active === item.id}
+                                onClick={this.handleItemClick}
+                            >
+                                {item.name}
+                                <Label>{item.sublevels.length}</Label>
+                            </Menu.Item>
+                        )
+                    })}
+                </Menu>
+            </React.Fragment>
         );
     }
 
