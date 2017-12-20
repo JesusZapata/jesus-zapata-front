@@ -5,6 +5,7 @@ import { Step,
     Icon } from 'semantic-ui-react'
 
 import CartStep from './CartStep';
+import AddressStep from './AddressStep';
 
 class CartContainer extends Component {
 
@@ -12,7 +13,7 @@ class CartContainer extends Component {
         super(props);
 
         this.state = {
-            step: 0
+            step: 0,
         };
     }
 
@@ -50,7 +51,7 @@ class CartContainer extends Component {
                     >
                         <Icon name='truck' />
                         <Step.Content>
-                            <Step.Title>Envio</Step.Title>
+                            <Step.Title>Dirección de envio</Step.Title>
                         </Step.Content>
                     </Step>
 
@@ -83,6 +84,10 @@ class CartContainer extends Component {
                 </Step.Group>                
                 { this.state.step === 0 ?
                     <CartStep/> :
+                    <React.Fragment/>
+                }
+                { this.state.step === 1 ?
+                    <AddressStep/> :
                     <React.Fragment/>
                 }
             </React.Fragment>

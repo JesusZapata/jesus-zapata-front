@@ -10,18 +10,6 @@ import { deleteProductToCart } from '../../../actions/CartActions';
 
 class CartStep extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            step: 0
-        };
-    }
-
-    handleClickStep = (e, {value}) => {
-        this.setState({step: value});
-    }
-
     handleClickDelete = (e, {value}) => {
         this.setState((prevState, props) => {
             props.Cart.products = props.Cart.products.filter(function(item) { 
