@@ -1,4 +1,5 @@
-import { ADD_PRODUCT_TO_CART } from '../constants/CartConstants';
+import { ADD_PRODUCT_TO_CART,
+    DELETE_PRODUCT_TO_CART } from '../constants/CartConstants';
 
 let initialState = {
     products: [],
@@ -14,6 +15,12 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 productSelect: action.productSelect
+            };
+        case DELETE_PRODUCT_TO_CART:
+            localStorage.setItem('App.Cart', JSON.stringify(state));
+            return {
+                ...state,
+                products: action.products
             };
         default:
             return state
