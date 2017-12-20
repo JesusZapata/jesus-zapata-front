@@ -142,7 +142,7 @@ class RegisterButton extends Component {
                             </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button color='black' onClick={this.closeModal}>Cancelar</Button>
+                            <Button color='black' onClick={this.closeModal}>Cerrar</Button>
                             <Button
                                 positive
                                 icon='checkmark'

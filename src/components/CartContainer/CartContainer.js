@@ -7,14 +7,15 @@ import { Step,
 import CartStep from './CartStep';
 import AddressStep from './AddressStep';
 import PayStep from './PayStep';
+import ProcessStep from './ProcessStep';
 
 class CartContainer extends Component {
 
     constructor(props) {
         super(props);
-
+        
         this.state = {
-            step: 0,
+            step: 0
         };
     }
 
@@ -33,8 +34,9 @@ class CartContainer extends Component {
                     <Step
                         link
                         value={0}
+                        disabled={this.props.process}
                         completed={this.state.step > 0}
-                        active={this.state.step === 0}
+                        active={this.state.step === 0 && !this.props.process}
                         onClick={this.handleClickStep}
                     >
                         <Icon name='shopping cart'/>
@@ -46,8 +48,9 @@ class CartContainer extends Component {
                     <Step
                         link
                         value={1}
+                        disabled={this.props.process}
                         completed={this.state.step > 1}
-                        active={this.state.step === 1}
+                        active={this.state.step === 1 && !this.props.process}
                         onClick={this.handleClickStep}
                     >
                         <Icon name='truck' />
@@ -59,8 +62,9 @@ class CartContainer extends Component {
                     <Step
                         link
                         value={2}
+                        disabled={this.props.process}
                         completed={this.state.step > 2}
-                        active={this.state.step === 2}
+                        active={this.state.step === 2 && !this.props.process}
                         onClick={this.handleClickStep}
                     >
                         <Icon name='payment' />
@@ -71,11 +75,9 @@ class CartContainer extends Component {
 
                     <Step
                         link
-                        value={3}
-                        completed={this.state.step === 3}                                
-                        disabled={this.state.step !== 3}
-                        active={this.state.step === 3}
-                        onClick={this.handleClickStep}
+                        completed={this.props.process}                                
+                        disabled={!this.props.process}
+                        active={this.props.process}
                     >
                         <Icon name='info' />
                         <Step.Content>
@@ -83,16 +85,20 @@ class CartContainer extends Component {
                         </Step.Content>
                     </Step>
                 </Step.Group>                
-                { this.state.step === 0 ?
+                { (this.state.step === 0 && !this.props.process) ? 
                     <CartStep/> :
                     <React.Fragment/>
                 }
-                { this.state.step === 1 ?
+                { (this.state.step === 1 && !this.props.process)  ?
                     <AddressStep/> :
                     <React.Fragment/>
                 }
-                { this.state.step === 2 ?
+                { (this.state.step === 2 && !this.props.process)  ?
                     <PayStep/> :
+                    <React.Fragment/>
+                }
+                { this.props.process ?
+                    <ProcessStep/> :
                     <React.Fragment/>
                 }
             </React.Fragment>

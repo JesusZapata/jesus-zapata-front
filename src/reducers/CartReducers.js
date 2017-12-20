@@ -1,12 +1,13 @@
 import { ADD_PRODUCT_TO_CART,
-    DELETE_PRODUCT_TO_CART } from '../constants/CartConstants';
+    DELETE_PRODUCT_TO_CART,
+    CLEAR_CART } from '../constants/CartConstants';
 
-let initialState = {
+let emptyState = {
     products: [],
     productSelect: null
 };
 
-initialState = (localStorage.getItem('App.Cart') ? JSON.parse(localStorage.getItem('App.Cart')) : initialState);
+let initialState = (localStorage.getItem('App.Cart') ? JSON.parse(localStorage.getItem('App.Cart')) : emptyState);
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
@@ -21,6 +22,11 @@ export default function reducer(state = initialState, action = {}) {
             return {
                 ...state,
                 products: action.products
+            };
+            case CLEAR_CART:
+            localStorage.setItem('App.Cart', JSON.stringify(emptyState));
+            return {
+                ...state
             };
         default:
             return state

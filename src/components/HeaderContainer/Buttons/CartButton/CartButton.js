@@ -7,6 +7,8 @@ import { Button,
 
 import CartContainer from '../../../CartContainer';
 
+import { clearCart } from '../../../../actions/CartActions';
+
 class CartButton extends Component {
 
     constructor(props) {
@@ -24,7 +26,8 @@ class CartButton extends Component {
     }
 
     handleProcessButton = () => {
-        console.log("asdf");
+        this.setState({process: true});
+        this.props.clearCart();
     }
 
     closeModal = () => this.setState({ open: false });
@@ -53,11 +56,11 @@ class CartButton extends Component {
                     <Modal.Header>Procesar compra</Modal.Header>
                     <Modal.Content>
                         <Modal.Description>
-                            <CartContainer/>
+                            <CartContainer process={this.state.process}/>
                         </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='black' onClick={this.closeModal}>Cancelar</Button>
+                        <Button color='black' onClick={this.closeModal}>Cerrar</Button>
                         <Button
                             positive
                             icon='checkmark'
@@ -87,5 +90,13 @@ const mapStateToProps = (state, ownProps) => ({
     User: state.userReducers
 });
 
-export default connect(mapStateToProps)(CartButton);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => {
+            dispatch(clearCart());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartButton);
     
