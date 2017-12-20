@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Card,
     Label,
     Button,
+    Dropdown,
     Icon,
     Image } from 'semantic-ui-react'
 
@@ -47,31 +48,78 @@ class ListProduct extends Component {
 
     render() {
         let filterProducts = this.filterProducts();
+
+        let sortOptions = [
+            {text: ' - ', value: '-'},
+            {text: 'Asc', value: 'ASC'},
+            {text: 'Desc', value: 'DESC'}
+        ];
+
         return (
-            <Card.Group itemsPerRow={4}>
-                {filterProducts.map((item, i) => {
-                    return (
-                        <Card fluid={true} key={item.id}>
-                            <Image src={image} size='medium'/>
-                            <Card.Content>
-                                <Card.Header>{item.name}</Card.Header>
-                                <Card.Meta>{item.price}<br/>{item.quantity} Unit.</Card.Meta>
-                            </Card.Content>
-                            <Card.Content extra>
-                                <Button as='div' labelPosition='right'>
-                                    <Button icon>
-                                        <Icon name='heart'/>
+            <React.Fragment>
+                <span>
+                    <Icon name='sort'/>Ordenar por :
+                    {'    '}
+                    Nombre
+                    {'    '}
+                    <Dropdown
+                        compact
+                        inline
+                        options={sortOptions}
+                        defaultValue={'-'}
+                    />
+                    {'    '}
+                    Precio
+                    {'    '}
+                    <Dropdown
+                        inline
+                        options={sortOptions}
+                        defaultValue={'-'}
+                    />
+                    {'    '}
+                    Disponibilidad
+                    {'    '}
+                    <Dropdown
+                        inline
+                        options={sortOptions}
+                        defaultValue={'-'}
+                    />
+                    {'    '}
+                    Cantidad
+                    {'    '}
+                    <Dropdown
+                        inline
+                        options={sortOptions}
+                        defaultValue={'-'}
+                    />
+                </span>
+                <br/>
+                <br/>
+                <Card.Group itemsPerRow={4}>
+                    {filterProducts.map((item, i) => {
+                        return (
+                            <Card fluid={true} key={item.id}>
+                                <Image src={image} size='medium'/>
+                                <Card.Content>
+                                    <Card.Header>{item.name}</Card.Header>
+                                    <Card.Meta>{item.price}<br/>{item.quantity} Unit.</Card.Meta>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <Button as='div' labelPosition='right'>
+                                        <Button icon>
+                                            <Icon name='heart'/>
+                                        </Button>
+                                        <Label as='a' basic pointing='left'>{item.like}</Label>
                                     </Button>
-                                    <Label as='a' basic pointing='left'>{item.like}</Label>
-                                </Button>
-                                <Button icon primary floated="left">
-                                    <Icon name='plus cart' />
-                                </Button>
-                            </Card.Content>
-                        </Card>
-                    )
-                })}
-            </Card.Group>
+                                    <Button icon primary floated="left">
+                                        <Icon name='plus cart' />
+                                    </Button>
+                                </Card.Content>
+                            </Card>
+                        )
+                    })}
+                </Card.Group>
+            </React.Fragment>
         );
     }
 

@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import { Form,
     Radio,
-    Header,
-    Dropdown } from 'semantic-ui-react'
+    Header } from 'semantic-ui-react'
 
 import { mainSearchChange } from '../../../actions/MainSearchActions';
 

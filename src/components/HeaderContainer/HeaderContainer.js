@@ -26,7 +26,7 @@ class HeaderContainer extends Component {
                     vertical
                 >
                     <Container>
-                        <Menu pointing secondary size='large'>
+                        <Menu pointing secondary size='small'>
                             <Menu.Item as='a' active>
                                 <Image src={logo} size='small' wrapped />
                             </Menu.Item>
