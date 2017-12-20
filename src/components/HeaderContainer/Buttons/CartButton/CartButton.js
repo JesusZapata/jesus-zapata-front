@@ -22,6 +22,16 @@ class CartButton extends Component {
         this.setState({step: value});
     }
 
+    disableButtonProcess = () => {
+        return !((this.props.Cart.products.length > 0) &&
+            this.props.User.email !== '' &&
+            this.props.User.full_name !== '' &&
+            this.props.User.issuing_bank !== '' &&
+            this.props.User.voucher_number !== '' &&
+            this.props.User.state !== '' &&
+            this.props.User.city !== '');
+    }
+
     closeModal = () => this.setState({ open: false });
 
     openModal = () => this.setState({ open: true });
@@ -57,7 +67,15 @@ class CartButton extends Component {
                             positive
                             icon='checkmark'
                             onClick={this.handleSubmit}
-                            disabled={true}
+                            disabled={
+                                !((this.props.Cart.products.length > 0) &&
+                                this.props.User.email !== '' &&
+                                this.props.User.full_name !== '' &&
+                                this.props.User.issuing_bank !== '' &&
+                                this.props.User.voucher_number !== '' &&
+                                this.props.User.state !== '' &&
+                                this.props.User.city !== '')
+                            }
                             labelPosition='right'
                             content="Procesar"
                         />

@@ -6,7 +6,7 @@ import { Form,
     
 import { userUpdateAction } from '../../../actions/UserActions';
 
-class AddressStep extends Component {
+class PayStep extends Component {
 
     constructor(props) {
         super(props);
@@ -14,9 +14,9 @@ class AddressStep extends Component {
         this.state = {
             User: props.User
         };
-        this.state.state = ('state' in props.User) ? props.User.state : '';
-        this.state.city = ('city' in props.User) ? props.User.city : '';
-        this.state.address = ('address' in props.User) ? props.User.address : '';
+        this.state.issuing_bank = ('issuing_bank' in props.User) ? props.User.issuing_bank : '';
+        this.state.voucher_number = ('voucher_number' in props.User) ? props.User.voucher_number : '';
+        this.state.pay_comment = ('pay_comment' in props.User) ? props.User.pay_comment : '';
     }
 
     handleChange = (event, {name, value}) => {
@@ -32,35 +32,35 @@ class AddressStep extends Component {
         return (
             <React.Fragment>
                 <Header size='medium'>
-                    Dirección de envio
+                    Metodo de pago
                     <Header.Subheader>
-                        Proporcione la direccion en donde se va a enviar el producto.
+                        Proporcione la iformacion del Deposito / Transferencia, para procesar el pago.
                     </Header.Subheader>
                 </Header>
                 <Form>
                     <Form.Group widths='equal'>
                         <Form.Input 
-                            label='Estado'
-                            placeholder='Estado'
-                            value={this.state.state}
+                            label='Banco emiso'
+                            placeholder='Banco emiso'
+                            value={this.state.issuing_bank}
                             onChange={this.handleChange}
-                            name="state"
+                            name="issuing_bank"
                         />
                         <Form.Input 
-                            label='Ciudad'
-                            placeholder='Ciudad'
-                            value={this.state.city}
+                            label='Numero de comprobante'
+                            placeholder='Numero de comprobante'
+                            value={this.state.voucher_number}
                             onChange={this.handleChange}
-                            name="city"
+                            name="voucher_number"
                         />
                     </Form.Group>
                     <Form.Group widths='equal'>
                         <Form.TextArea
-                            label='Direccion detallada'
-                            placeholder='Direccion detallada'
-                            value={this.state.address}
+                            label='Comentario'
+                            placeholder='Comentario'
+                            value={this.state.pay_comment}
                             onChange={this.handleChange}
-                            name="address"
+                            name="pay_comment"
                         />
                     </Form.Group>
                 </Form>
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddressStep);
+export default connect(mapStateToProps, mapDispatchToProps)(PayStep);

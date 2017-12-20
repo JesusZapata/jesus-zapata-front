@@ -6,6 +6,7 @@ import { Step,
 
 import CartStep from './CartStep';
 import AddressStep from './AddressStep';
+import PayStep from './PayStep';
 
 class CartContainer extends Component {
 
@@ -88,6 +89,10 @@ class CartContainer extends Component {
                 }
                 { this.state.step === 1 ?
                     <AddressStep/> :
+                    <React.Fragment/>
+                }
+                { this.state.step === 2 ?
+                    <PayStep/> :
                     <React.Fragment/>
                 }
             </React.Fragment>
