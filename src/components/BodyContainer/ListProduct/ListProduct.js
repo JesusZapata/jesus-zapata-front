@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Card,
-    Label,
-    Button,
     Dropdown,
     Icon,
     Image } from 'semantic-ui-react'
@@ -110,13 +108,6 @@ class ListProduct extends Component {
                                     <AddProductButton
                                         product={item}
                                     />
-                                    <Button as='div' labelPosition='right'>
-                                        <Button icon>
-                                            <Icon name='heart'/>
-                                        </Button>
-                                        <Label as='a' basic pointing='left'>{item.like}</Label>
-                                    </Button>
-                                    
                                 </Card.Content>
                             </Card>
                         )
