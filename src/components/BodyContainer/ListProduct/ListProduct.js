@@ -9,8 +9,10 @@ import { Card,
     Image } from 'semantic-ui-react'
 
 import { filterProduct } from '../../../actions/ProductActions';
-import image from '../../../assets/images/image.png';
 
+import AddProductButton from './Buttons/AddProductButton';
+
+import image from '../../../assets/images/image.png';
 import './ListProduct.css';
 
 class ListProduct extends Component {
@@ -105,15 +107,16 @@ class ListProduct extends Component {
                                     <Card.Meta>{item.price}<br/>{item.quantity} Unit.</Card.Meta>
                                 </Card.Content>
                                 <Card.Content extra>
+                                    <AddProductButton
+                                        product={item}
+                                    />
                                     <Button as='div' labelPosition='right'>
                                         <Button icon>
                                             <Icon name='heart'/>
                                         </Button>
                                         <Label as='a' basic pointing='left'>{item.like}</Label>
                                     </Button>
-                                    <Button icon primary floated="left">
-                                        <Icon name='plus cart' />
-                                    </Button>
+                                    
                                 </Card.Content>
                             </Card>
                         )

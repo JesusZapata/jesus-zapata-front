@@ -17,24 +17,22 @@ class DetailCategory extends Component {
     
     render() {
         return (
-            <React.Fragment>
-                <List size="small">
-                    <List.Item>
-                        <List.Icon name='folder' />
-                        <List.Content>
-                            <List.Header>Bebidas</List.Header>
-                            <List.List>
-                                <List.Item>
-                                    <List.Icon name='folder' />
-                                    <List.Content>
-                                        <List.Header>components</List.Header>
-                                    </List.Content>
-                                </List.Item>
-                            </List.List>
-                        </List.Content>
-                    </List.Item>
-                </List>
-            </React.Fragment>
+            <List size="small">
+                <List.Item>
+                    <List.Icon name='folder' />
+                    <List.Content>
+                        <List.Header>Bebidas</List.Header>
+                        <List.List>
+                            <List.Item>
+                                <List.Icon name='folder' />
+                                <List.Content>
+                                    <List.Header>components</List.Header>
+                                </List.Content>
+                            </List.Item>
+                        </List.List>
+                    </List.Content>
+                </List.Item>
+            </List>
         );
     }
 

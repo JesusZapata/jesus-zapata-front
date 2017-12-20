@@ -4,14 +4,13 @@ import { Container,
     Header,
     Segment,
     Menu ,
-    Button,
-    Icon,
     Image } from 'semantic-ui-react'
 
 import logo from '../../assets/images/logo.svg';
 
 import RegisterButton from './Buttons/RegisterButton';
 import UserButton from './Buttons/UserButton';
+import CartButton from './Buttons/CartButton';
 
 import './HeaderContainer.css';
 
@@ -33,14 +32,7 @@ class HeaderContainer extends Component {
                             <Menu.Item position='right'>
                                 <RegisterButton/>
                                 <UserButton/>
-                                <Button as='a' animated='vertical' basic style={{ marginLeft: '0.5em' }}>
-                                    <Button.Content visible>
-                                        <Icon name='cart'/>
-                                    </Button.Content>
-                                    <Button.Content hidden>
-                                        24
-                                    </Button.Content>
-                                </Button>
+                                <CartButton/>
                             </Menu.Item>
                         </Menu>
                     </Container>

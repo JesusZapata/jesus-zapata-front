@@ -1,0 +1,1 @@
+export const ADD_PRODUCT_TO_CART = 'App/Cart/ADD_PRODUCT_TO_CART';
