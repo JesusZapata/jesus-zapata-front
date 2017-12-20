@@ -22,8 +22,24 @@ class ListProduct extends Component {
             Product: props.Product,
             Category: props.Category,
             MainSearch: props.MainSearch,
-            filterProducts: []
+            name_order: 'ASC'
         };
+    }
+
+    handleChange = (event, {name, value}) => {
+        console.log(name);
+        console.log(value);
+        //this.setState({name: value});
+    }
+
+    sortProducts = () => {
+        let products = this.state.Product.products;
+
+        /*products = products.sort(function(a, b) {
+            return b.name.toLowerCase() < a.name.toLowerCase();
+        });*/
+
+        return products;
     }
 
     filterProducts = () => {
@@ -47,13 +63,15 @@ class ListProduct extends Component {
     }
 
     render() {
-        let filterProducts = this.filterProducts();
+        let filterProducts = this.sortProducts(this.filterProducts());
 
         let sortOptions = [
             {text: ' - ', value: '-'},
             {text: 'Asc', value: 'ASC'},
             {text: 'Desc', value: 'DESC'}
         ];
+
+        console.log(this);
 
         return (
             <React.Fragment>
@@ -62,12 +80,17 @@ class ListProduct extends Component {
                     {'    '}
                     Nombre
                     {'    '}
-                    <Dropdown
+                    <Dropdown.Menu
                         compact
                         inline
-                        options={sortOptions}
-                        defaultValue={'-'}
-                    />
+                        name='name_order'
+                        value={this.state.name_order}
+                        onChange={this.handleChange}
+                    >
+                        <Dropdown.Item text='-' value='-'/>
+                        <Dropdown.Item text='Asc' value='ASC'/>
+                        <Dropdown.Item text='Desc' value='DESC'/>
+                    </Dropdown>
                     {'    '}
                     Precio
                     {'    '}
