@@ -1,7 +1,6 @@
 import { FILTER_CATEGORY,
     SELECT_CATEGORY } from '../constants/CategoryConstants';
 
-
 import { CategoryData } from './CategoryData'
 
 const initialState = CategoryData;

@@ -82,5 +82,5 @@ export let CategoryData =
             }
         ],
         "filter": "",
-        "active": null
+        "active": 0
     };

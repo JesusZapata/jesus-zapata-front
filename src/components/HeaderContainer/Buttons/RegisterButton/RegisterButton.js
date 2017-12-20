@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import { Button,
     Form,
@@ -12,14 +11,6 @@ import { registerAction } from '../../../../actions/UserActions';
 import './RegisterButton.css';
 
 class RegisterButton extends Component {
-
-    static propTypes = {
-        open: PropTypes.bool,
-        full_name: PropTypes.string,
-        email: PropTypes.string,
-        password: PropTypes.string,
-        accept: PropTypes.bool
-    };
 
     constructor(props) {
         super(props);
