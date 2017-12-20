@@ -14,6 +14,7 @@ class CartButton extends Component {
 
         this.state = {
             open: false,
+            process: false,
             userRegister: ('email' in props.User) ? true : false,
         };
     }
@@ -22,14 +23,8 @@ class CartButton extends Component {
         this.setState({step: value});
     }
 
-    disableButtonProcess = () => {
-        return !((this.props.Cart.products.length > 0) &&
-            this.props.User.email !== '' &&
-            this.props.User.full_name !== '' &&
-            this.props.User.issuing_bank !== '' &&
-            this.props.User.voucher_number !== '' &&
-            this.props.User.state !== '' &&
-            this.props.User.city !== '');
+    handleProcessButton = () => {
+        console.log("asdf");
     }
 
     closeModal = () => this.setState({ open: false });
@@ -66,7 +61,7 @@ class CartButton extends Component {
                         <Button
                             positive
                             icon='checkmark'
-                            onClick={this.handleSubmit}
+                            onClick={this.handleProcessButton}
                             disabled={
                                 !((this.props.Cart.products.length > 0) &&
                                 this.props.User.email !== '' &&

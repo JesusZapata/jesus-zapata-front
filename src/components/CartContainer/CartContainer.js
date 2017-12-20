@@ -79,7 +79,7 @@ class CartContainer extends Component {
                     >
                         <Icon name='info' />
                         <Step.Content>
-                            <Step.Title>Confirmar compra</Step.Title>
+                            <Step.Title>Compra confirmada</Step.Title>
                         </Step.Content>
                     </Step>
                 </Step.Group>                
