@@ -22,6 +22,7 @@ class AddProductButton extends Component {
         this.setState((prevState, props) => {
             prevState.loading = true;
             props.Cart.products.push(this.props.product);
+            return prevState;
         });
 
         setTimeout(() => {

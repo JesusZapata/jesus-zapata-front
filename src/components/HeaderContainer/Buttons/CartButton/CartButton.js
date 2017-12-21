@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 
 import { Button,
     Modal,
-    Step,
     Icon } from 'semantic-ui-react'
+
+import CartContainer from '../../../CartContainer';
+
+import { clearCart } from '../../../../actions/CartActions';
 
 class CartButton extends Component {
 
@@ -13,13 +16,18 @@ class CartButton extends Component {
 
         this.state = {
             open: false,
-            step: 0,
+            process: false,
             userRegister: ('email' in props.User) ? true : false,
         };
     }
 
     handleClickStep = (e, {value}) => {
         this.setState({step: value});
+    }
+
+    handleProcessButton = () => {
+        this.setState({process: true});
+        this.props.clearCart();
     }
 
     closeModal = () => this.setState({ open: false });
@@ -41,76 +49,31 @@ class CartButton extends Component {
                         <Icon name='cart'/>
                     </Button.Content>
                     <Button.Content hidden>
-                        {this.props.Cart.products.length++}
+                        {this.props.Cart.products.length}
                     </Button.Content>
                 </Button>
                 <Modal open={this.state.open} size="small">
-                    <Modal.Header>Carrito de compra</Modal.Header>
+                    <Modal.Header>Procesar compra</Modal.Header>
                     <Modal.Content>
                         <Modal.Description>
-                            <Step.Group size='mini' widths={4} attached='top'>
-                                <Step
-                                    link
-                                    value={0}
-                                    completed={this.state.step > 0}
-                                    active={this.state.step === 0}
-                                    onClick={this.handleClickStep}
-                                >
-                                    <Icon name='shopping cart'/>
-                                    <Step.Content>
-                                        <Step.Title>Carrito de compra</Step.Title>
-                                    </Step.Content>
-                                </Step>
-
-                                <Step
-                                    link
-                                    value={1}
-                                    completed={this.state.step > 1}
-                                    active={this.state.step === 1}
-                                    onClick={this.handleClickStep}
-                                >
-                                    <Icon name='truck' />
-                                    <Step.Content>
-                                        <Step.Title>Envio</Step.Title>
-                                    </Step.Content>
-                                </Step>
-
-                                <Step
-                                    link
-                                    value={2}
-                                    completed={this.state.step > 2}
-                                    active={this.state.step === 2}
-                                    onClick={this.handleClickStep}
-                                >
-                                    <Icon name='payment' />
-                                    <Step.Content>
-                                        <Step.Title>Pago</Step.Title>
-                                    </Step.Content>
-                                </Step>
-
-                                <Step
-                                    link
-                                    value={3}
-                                    completed={this.state.step === 3}                                
-                                    disabled={this.state.step !== 3}
-                                    active={this.state.step === 3}
-                                    onClick={this.handleClickStep}
-                                >
-                                    <Icon name='info' />
-                                    <Step.Content>
-                                        <Step.Title>Confirmar compra</Step.Title>
-                                    </Step.Content>
-                                </Step>
-                            </Step.Group>
+                            <CartContainer process={this.state.process}/>
                         </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>
-                        <Button color='black' onClick={this.closeModal}>Cancelar</Button>
+                        <Button color='black' onClick={this.closeModal}>Cerrar</Button>
                         <Button
                             positive
                             icon='checkmark'
-                            onClick={this.handleSubmit}
-                            disabled={true}
+                            onClick={this.handleProcessButton}
+                            disabled={
+                                !((this.props.Cart.products.length > 0) &&
+                                this.props.User.email !== '' &&
+                                this.props.User.full_name !== '' &&
+                                this.props.User.issuing_bank !== '' &&
+                                this.props.User.voucher_number !== '' &&
+                                this.props.User.state !== '' &&
+                                this.props.User.city !== '')
+                            }
                             labelPosition='right'
                             content="Procesar"
                         />
@@ -127,5 +90,13 @@ const mapStateToProps = (state, ownProps) => ({
     User: state.userReducers
 });
 
-export default connect(mapStateToProps)(CartButton);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => {
+            dispatch(clearCart());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartButton);
     

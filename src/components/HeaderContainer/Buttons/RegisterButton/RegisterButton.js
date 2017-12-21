@@ -6,7 +6,7 @@ import { Button,
     Icon,
     Modal } from 'semantic-ui-react'
 
-import { registerAction } from '../../../../actions/UserActions';
+import { userRegisterAction } from '../../../../actions/UserActions';
 
 import './RegisterButton.css';
 
@@ -142,7 +142,7 @@ class RegisterButton extends Component {
                             </Modal.Description>
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button color='black' onClick={this.closeModal}>Cancelar</Button>
+                            <Button color='black' onClick={this.closeModal}>Cerrar</Button>
                             <Button
                                 positive
                                 icon='checkmark'
@@ -166,7 +166,7 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         register: (User) => {
-            dispatch(registerAction(User));
+            dispatch(userRegisterAction(User));
         }
     }
 }

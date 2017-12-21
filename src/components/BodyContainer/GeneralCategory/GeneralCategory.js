@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Label,
-    Header,
-    Menu } from 'semantic-ui-react'
+import { Header,
+    List } from 'semantic-ui-react'
 
-import { filterCategory,
-    selectCategory } from '../../../actions/CategoryActions';
+import { selectCategory } from '../../../actions/CategoryActions';
 
 import './GeneralCategory.css';
 
@@ -19,43 +17,60 @@ class GeneralCategory extends Component {
             Category: props.Category
         };
     }
-    
-    handleItemClick = (e, {value}) => {
+
+    handleItemClick = (value) => {
         this.setState((prevState, props) => {
             prevState.Category.active = value;
-            this.props.select(prevState);
+            this.props.selectCategory(prevState.Category);
             return prevState;
         });
+    }
+
+    getTreeCategory = (categories) => {
+        return (categories.map((item, i) => {
+            return (
+                <List.Item key={i}>
+                    <List.Icon name='angle right' />
+                    <List.Content>
+                        <List.Header
+                            as='a'
+                            key={item.id}
+                            onClick={() => this.handleItemClick(item.id)}
+                        >
+                            {item.name}
+                        </List.Header>
+                        {('sublevels' in item  && item.sublevels.length > 0) ?
+                            <List.List>
+                                {this.getTreeCategory(item.sublevels)}
+                            </List.List>:
+                            <React.Fragment/>
+                        }
+                    </List.Content>
+                </List.Item>
+            );
+        }));
     }
         
     render() {
         return (
             <React.Fragment>
                 <Header as='h5'>Categorias</Header>
-                <Menu pointing vertical fluid={true}>
-                    <Menu.Item
-                        key={0}
-                        value={0}
-                        active={this.state.Category.active === 0}
-                        onClick={this.handleItemClick}
-                    >
-                        Todos
-                    </Menu.Item>
-                    {this.state.Category.categories.map((item, i) => {
-                        return (
-                            <Menu.Item
-                                key={item.id}
-                                value={item.id}
-                                name={item.name}
-                                active={this.state.Category.active === item.id}
-                                onClick={this.handleItemClick}
+                <List>
+                    <List.Item>
+                        <List.Icon name='angle right' />
+                        <List.Content>
+                            <List.Header
+                                as='a'
+                                onClick={() => this.handleItemClick(0)}
                             >
-                                {item.name}
-                                <Label>{item.sublevels.length}</Label>
-                            </Menu.Item>
-                        )
-                    })}
-                </Menu>
+                                Todos
+                            </List.Header>
+                            <List.List>
+                                {this.getTreeCategory(this.props.Category.categories)}
+                            </List.List>
+                        </List.Content>
+                    </List.Item>
+                </List>
             </React.Fragment>
         );
     }
@@ -68,10 +83,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        filter: (Category) => {
-            dispatch(filterCategory(Category));
-        },
-        select: (Category) => {
+        selectCategory: (Category) => {
             dispatch(selectCategory(Category));
         }
     }
