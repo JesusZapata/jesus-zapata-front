@@ -14,6 +14,30 @@ npm start
 
 After you can open the Web Browser using the follow url [http://localhost:3000](http://localhost:3000)
 
+## Summary
+
+The Project was realized using React + Redux using several components
+
+For the web interface we use [https://semantic-ui.com/](https://semantic-ui.com/) a CSS Framework
+
+The creation of Components was done to separate the different functionalities and have the most modulated application
+
+Below is a tree with all the components created
+
+- App
+    - HeaderContainer
+        - Buttons
+            - CartButton
+            - RegisterButton
+            - UserButton
+    - BodyContainer
+        - GeneralCategory
+        - ListProduct
+            - Buttons
+                - AddProductButton
+        - MainSearch
+    - CartContainer
+
 ## Screenshot
 
 ### Home
@@ -45,3 +69,5 @@ Register the payment method
 Confirm the purchase
 
 ![image](https://raw.githubusercontent.com/JesusZapata/jesus-zapata-front/master/src/assets/images/screenshot/checkout_4.png)
+
+Note: This Project I did in 3 calendar days and previously I had no experience with React, I have experience in AngularJS after understanding the way of working everything was much easier
