@@ -22,22 +22,65 @@ class ListProduct extends Component {
             Product: props.Product,
             Category: props.Category,
             MainSearch: props.MainSearch,
-            name_order: 'ASC'
+            sort_name: 'ASC',
+            sort_price: '',
+            sort_available: '',
+            sort_quantity: '',
         };
     }
 
     handleChange = (event, {name, value}) => {
-        console.log(name);
-        console.log(value);
-        //this.setState({name: value});
+        this.setState((prevState, props) => {
+            prevState.sort_name = '';
+            prevState.sort_price = '';
+            prevState.sort_available = '';
+            prevState.sort_quantity = '';
+            prevState[name] = value;
+            return prevState;
+        });
     }
 
-    sortProducts = () => {
-        let products = this.state.Product.products;
+    sortProducts = (products) => {
+        let sort_name = this.state.sort_name;
+        let sort_price = this.state.sort_price;
+        let sort_available = this.state.sort_available;
+        let sort_quantity = this.state.sort_quantity;
+        
+        if (sort_name) {
+            products = products.sort(function(a, b) {
+                if (sort_name === 'ASC') {
+                    return b.name.toLowerCase() < a.name.toLowerCase();
+                }
+                return b.name.toLowerCase() > a.name.toLowerCase();
+            });
+        }
 
-        /*products = products.sort(function(a, b) {
-            return b.name.toLowerCase() < a.name.toLowerCase();
-        });*/
+        if (sort_price) {
+            products = products.sort(function(a, b) {
+                if (sort_price === 'ASC') {
+                    return b.price.toLowerCase() < a.price.toLowerCase();
+                }
+                return b.price.toLowerCase() > a.price.toLowerCase();
+            });
+        }
+
+        if (sort_available) {
+            products = products.sort(function(a, b) {
+                if (sort_available === 'ASC') {
+                    return b.available === a.available;
+                }
+                return b.available !== a.available;
+            });
+        }
+
+        if (sort_quantity) {
+            products = products.sort(function(a, b) {
+                if (sort_quantity === 'ASC') {
+                    return b.quantity < a.quantity;
+                }
+                return b.quantity > a.quantity;
+            });
+        }
 
         return products;
     }
@@ -66,12 +109,9 @@ class ListProduct extends Component {
         let filterProducts = this.sortProducts(this.filterProducts());
 
         let sortOptions = [
-            {text: ' - ', value: '-'},
             {text: 'Asc', value: 'ASC'},
             {text: 'Desc', value: 'DESC'}
         ];
-
-        console.log(this);
 
         return (
             <React.Fragment>
@@ -80,24 +120,22 @@ class ListProduct extends Component {
                     {'    '}
                     Nombre
                     {'    '}
-                    <Dropdown.Menu
-                        compact
+                    <Dropdown
                         inline
-                        name='name_order'
-                        value={this.state.name_order}
+                        options={sortOptions}
+                        value={this.state.sort_name}
+                        name="sort_name"
                         onChange={this.handleChange}
-                    >
-                        <Dropdown.Item text='-' value='-'/>
-                        <Dropdown.Item text='Asc' value='ASC'/>
-                        <Dropdown.Item text='Desc' value='DESC'/>
-                    </Dropdown>
+                    />
                     {'    '}
                     Precio
                     {'    '}
                     <Dropdown
                         inline
                         options={sortOptions}
-                        defaultValue={'-'}
+                        value={this.state.sort_price}
+                        name="sort_price"
+                        onChange={this.handleChange}
                     />
                     {'    '}
                     Disponibilidad
@@ -105,7 +143,9 @@ class ListProduct extends Component {
                     <Dropdown
                         inline
                         options={sortOptions}
-                        defaultValue={'-'}
+                        value={this.state.sort_available}
+                        name="sort_available"
+                        onChange={this.handleChange}
                     />
                     {'    '}
                     Cantidad
@@ -113,7 +153,9 @@ class ListProduct extends Component {
                     <Dropdown
                         inline
                         options={sortOptions}
-                        defaultValue={'-'}
+                        value={this.state.sort_quantity}
+                        name="sort_quantity"
+                        onChange={this.handleChange}
                     />
                 </span>
                 <br/>
